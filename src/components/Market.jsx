@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import yerbas from '../arrayYerbas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBasketShopping,
-  faEye,
-  faFilter,
-} from '@fortawesome/free-solid-svg-icons';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { screenStyle } from '../tailwindStyles';
+import MarketCard from './MarketCard';
+import Cart from './Cart';
 
-function Market() {
-  const watch = <FontAwesomeIcon icon={faEye} />;
-  const shopping = <FontAwesomeIcon icon={faBasketShopping} />;
-  const filter = <FontAwesomeIcon icon={faFilter} />;
+function Market({ createCart, cart, openCart, handleOpencartClick }) {
   const [yerbaArr, setYerbaArr] = useState([]);
   const [open, setOpen] = useState(false);
+  const filter = <FontAwesomeIcon icon={faFilter} />;
 
   const handleChange = (gr, checkbox) => {
     if (checkbox.checked) {
@@ -65,70 +61,35 @@ function Market() {
           </div>
         )}
         <div className="grid grid-cols-1 gap-4">
-          {yerbaArr.length > 0
-            ? yerbaArr.map((yerba) => (
-                <div
-                  className="border border-slate-50 bg-green-900 rounded-sm flex p-2 flex-col items-center"
-                  key={yerba.id}
-                >
-                  <h3 className="text-xl font-semibold text-slate-50">
-                    {yerba.yerba}
-                  </h3>
-                  <img className="w-50" src={yerba.img} />
-                  <p className="text-xl text-slate-50 font-semibold">
-                    Precio: ${yerba.price}
-                  </p>
-                  <p className="text-slate-50 font-medium text-lg mb-3">
-                    Stock: {yerba.stock}
-                  </p>
-                  <div className="flex gap-7">
-                    <button
-                      className="bg-red-600 px-7 py-1 text-xl rounded-sm text-slate-50"
-                      type="button"
-                    >
-                      {watch}
-                    </button>
-                    <button
-                      className="bg-red-600 px-7 py-1 text-xl rounded-sm text-slate-50"
-                      type="button"
-                    >
-                      {shopping}
-                    </button>
-                  </div>
-                </div>
-              ))
-            : yerbas.map((yerba) => (
-                <div
-                  className="border border-slate-50 bg-green-900 rounded-sm flex p-2 flex-col items-center"
-                  key={yerba.id}
-                >
-                  <h3 className="text-xl font-semibold text-slate-50">
-                    {yerba.yerba}
-                  </h3>
-                  <img className="w-50" src={yerba.img} />
-                  <p className="text-xl text-slate-50 font-semibold">
-                    Precio: ${yerba.price}
-                  </p>
-                  <p className="text-slate-50 font-medium text-lg mb-3">
-                    Stock: {yerba.stock}
-                  </p>
-                  <div className="flex gap-7">
-                    <button
-                      className="bg-red-600 px-7 py-1 text-xl rounded-sm text-slate-50"
-                      type="button"
-                    >
-                      {watch}
-                    </button>
-                    <button
-                      className="bg-red-600 px-7 py-1 text-xl rounded-sm text-slate-50"
-                      type="button"
-                    >
-                      {shopping}
-                    </button>
-                  </div>
-                </div>
-              ))}
+          <MarketCard createCart={createCart} yerbaArr={yerbaArr} />
         </div>
+        {openCart && (
+          <section className="absolute top-0 right-0 h-full w-11/12 bg-slate-50">
+            <div className="flex items-center border-slate-950 border-b bg-slate-950 h-16">
+              <button
+                className="text-left text-slate-50 p-2 text-xl font-bold"
+                type="button"
+                onClick={handleOpencartClick}
+              >
+                X
+              </button>
+              <h2 className="text-2xl text-slate-50 font-bold">Carrito</h2>
+            </div>
+            {cart.length === 0 && (
+              <p className="py-2">No hay ningun producto todavía</p>
+            )}
+            {cart.map((product) => (
+              <Cart
+                key={product.id}
+                id={product.id}
+                yerba={product.yerba}
+                price={product.price}
+                img={product.img}
+                quantity={product.quantity}
+              />
+            ))}
+          </section>
+        )}
       </article>
     </section>
   );

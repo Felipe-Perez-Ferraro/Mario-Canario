@@ -3,8 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { linkStyle, screenStyle } from '../tailwindStyles';
+import Cart from './Cart';
 
-function Navbar() {
+function Navbar({ cart, handleOpencartClick, openCart }) {
   const bag = <FontAwesomeIcon icon={faBagShopping} />;
 
   return (
@@ -29,7 +30,42 @@ function Navbar() {
                 Comprar
               </NavLink>
             </li>
-            <li className={linkStyle}>{bag}</li>
+            <li
+              className="cursor-pointer flex items-center gap-1 text-lg hover:text-red-600"
+              onClick={handleOpencartClick}
+            >
+              {bag}
+              <span className="text-xs bg-red-600 text-slate-50 rounded-md p-1 text-center">
+                {cart.length}
+              </span>
+            </li>
+            {openCart && (
+              <section className="absolute top-0 right-0 h-full w-11/12 bg-slate-50">
+                <div className="flex items-center border-slate-950 border-b bg-slate-950 h-16">
+                  <button
+                    className="text-left text-slate-50 p-2 text-xl font-bold"
+                    type="button"
+                    onClick={handleOpencartClick}
+                  >
+                    X
+                  </button>
+                  <h2 className="text-2xl text-slate-50 font-bold">Carrito</h2>
+                </div>
+                {cart.length === 0 && (
+                  <p className="py-2">No hay ningun producto todavía</p>
+                )}
+                {cart.map((product) => (
+                  <Cart
+                    key={product.id}
+                    id={product.id}
+                    yerba={product.yerba}
+                    price={product.price}
+                    img={product.img}
+                    quantity={product.quantity}
+                  />
+                ))}
+              </section>
+            )}
           </ul>
         </nav>
       </header>
