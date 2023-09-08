@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { linkStyle, screenStyle } from '../tailwindStyles';
 import Cart from './Cart';
 
-function Navbar({ cart, handleOpencartClick, openCart }) {
+function Navbar({ cart, handleOpencartClick, openCart, addQty, restQty, removeFromCart }) {
   const bag = <FontAwesomeIcon icon={faBagShopping} />;
 
   return (
@@ -56,12 +56,16 @@ function Navbar({ cart, handleOpencartClick, openCart }) {
                 )}
                 {cart.map((product) => (
                   <Cart
-                    key={product.id}
-                    id={product.id}
-                    yerba={product.yerba}
-                    price={product.price}
-                    img={product.img}
-                    quantity={product.quantity}
+                  key={product.id}
+                  id={product.id}
+                  yerba={product.yerba}
+                  price={product.price}
+                  img={product.img}
+                  quantity={product.quantity}
+                  removeFromCart={removeFromCart}
+                  cart={cart}
+                  addQty={addQty}
+                  restQty={restQty}
                   />
                 ))}
               </section>

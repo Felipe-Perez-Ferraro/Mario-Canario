@@ -63,8 +63,12 @@ function App() {
         <>
           <Navbar
             cart={cart}
-            handleOpencartClick={handleOpenCartClick}
+            createCart={createCart}
             openCart={openCart}
+            handleOpencartClick={handleOpenCartClick}
+            removeFromCart={removeFromCart}
+            addQty={addQty}
+            restQty={restQty}
           />
           <Home />
           <Footer />
