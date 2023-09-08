@@ -6,7 +6,7 @@ import serena500g from './assets/serena500g.png';
 
 const yerbas = [
   {
-    id: 1,
+    id: 0,
     yerba: 'Yerba Canarias 1kg',
     g: 1000,
     desciption:
@@ -17,7 +17,7 @@ const yerbas = [
     img: yerba1kg,
   },
   {
-    id: 2,
+    id: 1,
     yerba: 'Yerba Canarias 500g',
     g: 500,
     desciption:
@@ -28,7 +28,7 @@ const yerbas = [
     img: yerba500g,
   },
   {
-    id: 3,
+    id: 2,
     yerba: 'Yerba Canarias 250g',
     g: 250,
     desciption:
@@ -39,7 +39,7 @@ const yerbas = [
     img: yerba250g,
   },
   {
-    id: 4,
+    id: 3,
     yerba: 'Yerba Canarias 1000g',
     g: 1000,
     desciption:
@@ -50,7 +50,7 @@ const yerbas = [
     img: serena1kg,
   },
   {
-    id: 5,
+    id: 4,
     yerba: 'Yerba Canarias 500g',
     g: 500,
     desciption:
