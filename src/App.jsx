@@ -28,6 +28,10 @@ function App() {
       setCart(updateQuantity);
     }
   };
+  const removeFromCart = (id) => {
+    const updatedCart = cart.filter((item) => item.id !== id);
+    setCart(updatedCart);
+  }
   const handleOpenCartClick = () => {
     setOpenCart(!openCart);
   };
@@ -57,6 +61,7 @@ function App() {
             createCart={createCart}
             openCart={openCart}
             handleOpencartClick={handleOpenCartClick}
+            removeFromCart={removeFromCart}
           />
           <Footer />
         </>

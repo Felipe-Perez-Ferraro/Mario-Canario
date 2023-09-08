@@ -9,11 +9,11 @@ function Navbar({ cart, handleOpencartClick, openCart }) {
   const bag = <FontAwesomeIcon icon={faBagShopping} />;
 
   return (
-    <section className="bg-yellow-400">
+    <section className="bg-green-950">
       <header
         className={`${screenStyle} flex items-center justify-between h-16`}
       >
-        <h1 className="font-bold text-green-950 text-xl">Canarias Mario</h1>
+        <h1 className="font-bold text-yellow-500 text-xl">Canarias Mario</h1>
         <nav>
           <ul className="flex items-center gap-2">
             <li>
@@ -31,7 +31,7 @@ function Navbar({ cart, handleOpencartClick, openCart }) {
               </NavLink>
             </li>
             <li
-              className="cursor-pointer flex items-center gap-1 text-lg hover:text-red-600"
+              className="cursor-pointer flex items-center gap-1 text-lg text-slate-50 hover:text-red-600"
               onClick={handleOpencartClick}
             >
               {bag}
@@ -52,7 +52,7 @@ function Navbar({ cart, handleOpencartClick, openCart }) {
                   <h2 className="text-2xl text-slate-50 font-bold">Carrito</h2>
                 </div>
                 {cart.length === 0 && (
-                  <p className="py-2">No hay ningun producto todavía</p>
+                  <p className="py-2 px-1 font-medium">No hay ningun producto todavía.</p>
                 )}
                 {cart.map((product) => (
                   <Cart

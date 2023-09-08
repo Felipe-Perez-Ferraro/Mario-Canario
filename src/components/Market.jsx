@@ -6,7 +6,13 @@ import { screenStyle } from '../tailwindStyles';
 import MarketCard from './MarketCard';
 import Cart from './Cart';
 
-function Market({ createCart, cart, openCart, handleOpencartClick }) {
+function Market({
+  createCart,
+  cart,
+  openCart,
+  handleOpencartClick,
+  removeFromCart,
+}) {
   const [yerbaArr, setYerbaArr] = useState([]);
   const [open, setOpen] = useState(false);
   const filter = <FontAwesomeIcon icon={faFilter} />;
@@ -27,26 +33,26 @@ function Market({ createCart, cart, openCart, handleOpencartClick }) {
   };
 
   return (
-    <section className="bg-green-950 py-9">
+    <section className="bg-slate-300 py-9">
       <article className={`${screenStyle}`}>
-        <h2 className="text-3xl text-red-600 font-bold mb-3">Yerbas</h2>
+        <h2 className="text-3xl text-green-950 font-bold mb-3">Yerbas</h2>
         <button
           onClick={handleFilterClick}
-          className="text-xl text-slate-50 mb-1"
+          className="text-xl text-red-800 mb-1"
           type="button"
         >
           {filter} Filtros
         </button>
         {open && (
           <div className="mb-6">
-            <h4 className="text-lg text-red-600 font-medium">Por gramos:</h4>
+            <h4 className="text-lg text-green-950 font-medium">Por gramos:</h4>
             <input
               onChange={handleCheckboxClick}
               type="checkbox"
               name="500"
               id=""
             />
-            <label className="mr-3 ml-1 text-slate-50" htmlFor="500">
+            <label className="mr-3 ml-1 text-green-950" htmlFor="500">
               500gr
             </label>
             <input
@@ -55,7 +61,7 @@ function Market({ createCart, cart, openCart, handleOpencartClick }) {
               name="1000"
               id=""
             />
-            <label className="mr-3 ml-1 text-slate-50" htmlFor="1000">
+            <label className="mr-3 ml-1 text-green-950" htmlFor="1000">
               1000gr
             </label>
           </div>
@@ -76,7 +82,9 @@ function Market({ createCart, cart, openCart, handleOpencartClick }) {
               <h2 className="text-2xl text-slate-50 font-bold">Carrito</h2>
             </div>
             {cart.length === 0 && (
-              <p className="py-2">No hay ningun producto todavía</p>
+              <p className="py-2 px-1 font-medium">
+                No hay ningun producto todavía.
+              </p>
             )}
             {cart.map((product) => (
               <Cart
@@ -86,6 +94,8 @@ function Market({ createCart, cart, openCart, handleOpencartClick }) {
                 price={product.price}
                 img={product.img}
                 quantity={product.quantity}
+                cart={cart}
+                removeFromCart={removeFromCart}
               />
             ))}
           </section>
