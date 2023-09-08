@@ -15,7 +15,7 @@ function Cart({
 }) {
   const trash = <FontAwesomeIcon icon={faTrash} />;
   const handleAddQty = (id) => {
-    addQty(id);
+    addQty(id)
   };
   const handleRestQty = (id) => {
     if (quantity > 1) {

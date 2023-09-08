@@ -12,6 +12,7 @@ function App() {
     return storedData ? JSON.parse(storedData) : [];
   });
   const [openCart, setOpenCart] = useState(false);
+  
   const createCart = (product) => {
     const prodId = cart.findIndex((item) => item.id === product.id);
     if (prodId === -1) {
@@ -32,26 +33,36 @@ function App() {
       setCart(updateQuantity);
     }
   };
+
   const addQty = (id) => {
-    const updateQuantity = [...cart];
-    updateQuantity[id].quantity += 1;
-    setCart(updateQuantity);
+    const updatedCart = cart.map(item => {
+      if (item.id === id) {
+        return { ...item, quantity: item.quantity + 1 };
+      }
+      return item;
+    });
+    setCart(updatedCart);
   };
+  
   const restQty = (id) => {
-    const updateQuantity = [...cart];
-    updateQuantity[id].quantity -= 1;
-    setCart(updateQuantity);
-  }
+    const updatedCart = cart.map((item) => {
+      if (item.id === id) {
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
+    setCart(updatedCart);
+  };
+
   const removeFromCart = (id) => {
     const updatedCart = cart.filter((item) => item.id !== id);
-    updatedCart.forEach((el) => {
-      el.id > 1 ? cart[id] = el.id-- : el.id = 0; 
-    })
     setCart(updatedCart);
-  }
+  };
+
   const handleOpenCartClick = () => {
     setOpenCart(!openCart);
   };
+
   useEffect(() => {
     localStorage.setItem('Cart', JSON.stringify(cart));
   }, [cart]);
