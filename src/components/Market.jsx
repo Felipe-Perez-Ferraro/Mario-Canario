@@ -12,6 +12,8 @@ function Market({
   openCart,
   handleOpencartClick,
   removeFromCart,
+  addQty,
+  restQty,
 }) {
   const [yerbaArr, setYerbaArr] = useState([]);
   const [open, setOpen] = useState(false);
@@ -94,8 +96,10 @@ function Market({
                 price={product.price}
                 img={product.img}
                 quantity={product.quantity}
-                cart={cart}
                 removeFromCart={removeFromCart}
+                cart={cart}
+                addQty={addQty}
+                restQty={restQty}
               />
             ))}
           </section>
